@@ -81,23 +81,28 @@ function backup_repo {
 arr_repo_path=()
 arr_repo_name=()
 
-# Read repo list from file
-while read line
-do
-	arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
-	arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
-done < "$script_dir/repos.txt"
+if [ -f "$script_dir/repos.txt" ]
+then
+	# Read repo list from file
+	while read line
+	do
+		arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
+		arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
+	done < "$script_dir/repos.txt"
 
-print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
-for index in ${!arr_repo_name[*]}
-do
-	print_info "Processing repo: ${arr_repo_name[$index]} ..."
-	check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
-	if [ "$repo_state" -ne "0" ]
-	then
-		echo "backup_repo"
-		# backup_repo
-	else
-		print_warning "Do nothing with this repo"
-	fi
-done
+	print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
+	for index in ${!arr_repo_name[*]}
+	do
+		print_info "Processing repo: ${arr_repo_name[$index]} ..."
+		check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
+		if [ "$repo_state" -ne "0" ]
+		then
+			echo "backup_repo"
+			# backup_repo
+		else
+			print_warning "Do nothing with this repo"
+		fi
+	done
+else
+	print_error "File repos.txt not found!!"
+fi
