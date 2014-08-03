@@ -1,5 +1,8 @@
 #!/bin/bash
 
+script_dir=$(dirname "$0")
+source "$script_dir/colors.sh"
+
 BACKUP_VERSION="v1.0"
 
 # $1: Repo location
@@ -66,28 +69,27 @@ function backup_repo {
 	if [ "$num_lines" -gt "0" ]
 	then
 		remote=$(git remote | head -1 | tail -1)
-		echo "Pushing to remote: $remote"
+		print_info "Pushing to remote: $remote"
 
 		git push --all $remote
 	else
-		echo "$2 has no remote to pushing"
+		print_error "$2 has no remote to pushing"
 	fi
 }
 
 # Main
-arr_repo_path=("$HOME/Pictures/Icons/" "$HOME/Backup-script" "$HOME/X-Files")
-arr_repo_name=("Icons" "Backup" "X-Files")
+arr_repo_path=("$HOME/Pictures/Icons/" "$HOME/X-Files")
+arr_repo_name=("Icons" "X-Files")
 
-echo "Starting back up ${#arr_repo_name[*]} repo ..."
+print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
 for index in ${!arr_repo_name[*]}
 do
-	# \e[31mHello World\e[0m
-	echo -e "\x1B[31mProcessing repo: ${arr_repo_name[$index]} ...\x1B[0m"
+	print_info "Processing repo: ${arr_repo_name[$index]} ..."
 	check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
 	if [ "$repo_state" -ne "0" ]
 	then
 		backup_repo
 	else
-		echo "Do nothing with this repo"
+		print_warning "Do nothing with this repo"
 	fi
 done
