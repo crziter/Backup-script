@@ -78,8 +78,15 @@ function backup_repo {
 }
 
 # Main
-arr_repo_path=("$HOME/Pictures/Icons/" "$HOME/X-Files")
-arr_repo_name=("Icons" "X-Files")
+arr_repo_path=()
+arr_repo_name=()
+
+# Read repo list from file
+while read line
+do
+	arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
+	arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
+done < repos.txt
 
 print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
 for index in ${!arr_repo_name[*]}
