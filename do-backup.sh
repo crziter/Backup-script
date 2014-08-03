@@ -76,7 +76,7 @@ function check_repo_state {
 # $1: remote name
 # $2: repo name
 function backup_repo {
-	echo "Processing add, commit, push command in `pwd`"
+	echo "Processing add, commit, push command in $2 (remote $1)"
 	git add .
 
 	git config user.email $DEFAULT_COMMIT_EMAIL
