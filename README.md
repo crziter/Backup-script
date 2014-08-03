@@ -24,4 +24,4 @@ Backup-script is a utility which help you backing up git repositories in one lin
 
 	```./do-backup-sh```
 
-	
+5. Fork and do-every-thing-you-want
