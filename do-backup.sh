@@ -75,7 +75,7 @@ function backup_repo {
 }
 
 # Main
-arr_repo_path=("$HOME/Pictures/Icons/" "$HOME/Backup")
+arr_repo_path=("$HOME/Pictures/Icons/" "$HOME/Backup-script")
 arr_repo_name=("Icons" "Backup")
 
 echo "Starting back up ${#arr_repo_name[*]} repo ..."
