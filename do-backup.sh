@@ -86,7 +86,7 @@ while read line
 do
 	arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
 	arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
-done < repos.txt
+done < "$script_dir/repos.txt"
 
 print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
 for index in ${!arr_repo_name[*]}
@@ -95,7 +95,8 @@ do
 	check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
 	if [ "$repo_state" -ne "0" ]
 	then
-		backup_repo
+		echo "backup_repo"
+		# backup_repo
 	else
 		print_warning "Do nothing with this repo"
 	fi

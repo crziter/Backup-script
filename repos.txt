@@ -1,2 +1,0 @@
-Icons	|	$HOME/Pictures/Icons/
-X-Files	|	$HOME/X-Files
