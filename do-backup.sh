@@ -60,7 +60,7 @@ function backup_repo {
 	git config user.email "crziter@gmail.com"
 	git config user.name "crziter"
 
-	git commit -m "Backup repo $2 with BACKUP $BACKUP_VERSION"
+	git commit -m "Backup repo $2 with BACKUP $BACKUP_VERSION on `date`"
 
 	num_lines=$(git remote | wc -l)
 	if [ "$num_lines" -gt "0" ]
