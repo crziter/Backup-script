@@ -85,7 +85,7 @@ function backup_repo {
 	git commit -m "Backup repo $2 with BACKUP $BACKUP_VERSION on `date`"
 
 	git remote | grep -q "$1"
-	if [ $? -ne "0" ] # found
+	if [ "$?" -eq "0" ] # found
 	then
 		print_info "Pushing to remote: $1"
 		git push --all $1
