@@ -85,7 +85,7 @@ arr_repo_name=()
 while read line
 do
 	arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
-	arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
+	arr_repo_path+=($("$(echo $line | cut -d'|' -f2)"))
 done < repos.txt
 
 print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
