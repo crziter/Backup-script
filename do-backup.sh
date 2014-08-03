@@ -81,7 +81,8 @@ arr_repo_name=("Icons" "Backup" "X-Files")
 echo "Starting back up ${#arr_repo_name[*]} repo ..."
 for index in ${!arr_repo_name[*]}
 do
-	echo "Processing repo: ${arr_repo_name[$index]} ..."
+	# \e[31mHello World\e[0m
+	echo -e "\x1B[31mProcessing repo: ${arr_repo_name[$index]} ...\x1B[0m"
 	check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
 	if [ "$repo_state" -ne "0" ]
 	then
