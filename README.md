@@ -4,7 +4,9 @@ Backup-script is a utility which help you backing up git repositories in one lin
 1. Clone the repository
 
 
-	```git clone https://github.com/crziter/Backup-script.git```
+	```
+	git clone https://github.com/crziter/Backup-script.git
+	```
 
 2. Fix permission (if necessary)
 
@@ -18,11 +20,15 @@ Backup-script is a utility which help you backing up git repositories in one lin
 3. Add repo to library
 
 
-	```./add-repo.sh "Repo name" "/repo/location"```
-	
+	```
+	./add-repo.sh "Repo name" "/repo/location"
+	```
+
 4. Do backup every time you need
 
 
-	```./do-backup-sh```
+	```
+	./do-backup-sh
+	```
 
 5. Fork and do-every-thing-you-want
