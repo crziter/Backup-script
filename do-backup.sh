@@ -1,9 +1,27 @@
 #!/bin/bash
 
+# Change log:
+# [*] v1.0:
+#	- Load repository list from file (repos.txt)
+#	- Check if git repository has modified
+#	- Check if git repository has created new files
+#	- Auto commit the change of repository
+#	- Auto pushing to the repository's first remote if present
+
+# [*] v1.5:
+#	- Fix up some bugs
+#	- Change user.email and user.name config to the global variables
+
+# To-do:
+#	- Check if files have been deleted to completely remove (do git rm --cached FILE automatic)
+#	- User defined remote for pushing to (not auto choose the first one)
+
 script_dir=$(dirname "$0")
 source "$script_dir/colors.sh"
 
-BACKUP_VERSION="v1.0"
+BACKUP_VERSION="v1.5"					# Script version
+DEFAULT_COMMIT_EMAIL="crziter@gmail"
+DEFAULT_COMMIT_NAME="crziter"
 
 # $1: Repo location
 # $2: Repo name
@@ -60,8 +78,8 @@ function backup_repo {
 	echo "Processing add, commit, push command in `pwd`"
 	git add .
 
-	git config user.email "crziter@gmail.com"
-	git config user.name "crziter"
+	git config user.email $DEFAULT_COMMIT_EMAIL
+	git config user.name $DEFAULT_COMMIT_NAME
 
 	git commit -m "Backup repo $2 with BACKUP $BACKUP_VERSION on `date`"
 
