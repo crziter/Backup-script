@@ -14,7 +14,7 @@
 
 # To-do:
 #	- Check if files have been deleted to completely remove (do git rm --cached FILE automatic)
-#	- User defined remote for pushing to (not auto choose the first one)
+#	- [finish] User defined remote for pushing to (not auto choose the first one)
 #	- [finish] Add usage to add-repo.sh, rm-repo.sh
 
 script_dir=$(dirname "$0")
@@ -73,8 +73,8 @@ function check_repo_state {
 	repo_state=$state
 }
 
-# $1: Repo location
-# $2: Repo name
+# $1: remote name
+# $2: repo name
 function backup_repo {
 	echo "Processing add, commit, push command in `pwd`"
 	git add .
@@ -84,13 +84,11 @@ function backup_repo {
 
 	git commit -m "Backup repo $2 with BACKUP $BACKUP_VERSION on `date`"
 
-	num_lines=$(git remote | wc -l)
-	if [ "$num_lines" -gt "0" ]
+	git remote | grep -q "$1"
+	if [ $? -ne "0" ] # found
 	then
-		remote=$(git remote | head -1 | tail -1)
-		print_info "Pushing to remote: $remote"
-
-		git push --all $remote
+		print_info "Pushing to remote: $1"
+		git push --all $1
 	else
 		print_error "$2 has no remote to pushing"
 	fi
@@ -99,6 +97,7 @@ function backup_repo {
 # Main
 arr_repo_path=()
 arr_repo_name=()
+arr_repo_remote=()
 
 if [ -f "$script_dir/repos.txt" ]
 then
@@ -107,6 +106,7 @@ then
 	do
 		arr_repo_name+=("$(echo $line | cut -d'|' -f1)")
 		arr_repo_path+=("$(echo $line | cut -d'|' -f2)")
+		arr_repo_remote+=("$(echo $line | cut -d'|' -f3)")
 	done < "$script_dir/repos.txt"
 
 	print_msg $BGreen "Starting back up ${#arr_repo_name[*]} repo ..."
@@ -116,8 +116,7 @@ then
 		check_repo_state "${arr_repo_path[$index]}" "${arr_repo_name[$index]}"
 		if [ "$repo_state" -ne "0" ]
 		then
-			echo "backup_repo"
-			# backup_repo
+			backup_repo ${arr_repo_remote[$index]} ${arr_repo_name[$index]}
 		else
 			print_warning "Do nothing with this repo"
 		fi
