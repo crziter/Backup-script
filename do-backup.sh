@@ -15,6 +15,7 @@
 # To-do:
 #	- Check if files have been deleted to completely remove (do git rm --cached FILE automatic)
 #	- User defined remote for pushing to (not auto choose the first one)
+#	- Add usage to add-repo.sh, rm-repo.sh
 
 script_dir=$(dirname "$0")
 source "$script_dir/colors.sh"
