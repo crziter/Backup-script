@@ -79,14 +79,17 @@ function print_msg {
 	echo -e "$1""$2""$Color_Off"
 }
 
+# $1: Message
 function print_error {
-	echo -e "$Red""$1""$Color_Off"
+	print_msg "$Red" "$1"
 }
 
+# $1: Message
 function print_info {
-	echo -e "$Green""$1""$Color_Off"
+	print_msg "$Green" "$1"
 }
 
+# $1: Message
 function print_warning {
-	echo -e "$Yellow""$1""$Color_Off"
+	print_msg "$Yellow" "$1"
 }
