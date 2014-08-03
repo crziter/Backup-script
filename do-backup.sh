@@ -16,11 +16,11 @@ function check_repo_state {
 
 	eval $cmd_mod
 	ret_mod=$?
-	echo "$cmd_mod returns $ret_mod"
+	# echo "$cmd_mod returns $ret_mod"
 
 	eval $cmd_new
 	ret_new=$?
-	echo "$cmd_new returns $ret_new"
+	# echo "$cmd_new returns $ret_new"
 
 	state=0 # Nothing has changed
 	if [ "$ret_mod" -eq "0" ] # Found
