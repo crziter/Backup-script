@@ -21,7 +21,7 @@ Backup-script is a utility which help you backing up git repositories in one lin
 
 
 	```bash
-	./add-repo.sh "Repo name" "/repo/location"
+	./add-repo.sh "Repo name" "/repo/location" "remote"
 	```
 
 4. Do backup every time you need
