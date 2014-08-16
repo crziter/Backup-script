@@ -69,7 +69,7 @@ then
 		if [ "$repo_state" -ne "0" ]
 		then
 			print_warning "This repo has changed, backing up ..."
-			# backup_repo ${arr_repo_remote[$index]} ${arr_repo_name[$index]}
+			backup_repo ${arr_repo_remote[$index]} ${arr_repo_name[$index]}
 		else
 			print_warning "Nothing has changed, skipping"
 		fi
